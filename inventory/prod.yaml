@@ -1,0 +1,24 @@
+all:
+  hosts:
+    ansible-3
+    ansible-4
+    ansible-5
+    tomcat-1
+    tomcat-2
+  children:
+    aws:
+      hosts:
+        ansible-3
+        ansible-4
+        ansible-5
+        tomcat-1
+        tomcat-2
+    ansible:
+      hosts:
+        ansible-3
+        ansible-4
+        ansible-5
+    tomcat:
+      hosts:
+        tomcat-1
+        tomcat-2

@@ -1,0 +1,22 @@
+---
+# This role will get the datadog version and upgrade it to the latest specified
+
+- name: Get the uptime of the server
+  tasks:
+
+    - name: Gather the hostnames
+      command: hostname
+      register: hostname
+
+    - name: Check the uptime
+      shell: uptime
+      register: uptime_pre_reboot
+
+    - name: Setting the uptime fact
+      set_fact:
+        uptime_days: "{ { (uptime_pre_reboot.stdout) } }"
+
+    - name: Hosts that could use a uptime_pre_reboot
+      debug:
+        msg: " hast not been rebooted since  days, which is older than a month"
+      when: (uptime_days) > 30
